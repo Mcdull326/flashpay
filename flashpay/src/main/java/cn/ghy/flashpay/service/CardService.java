@@ -11,17 +11,25 @@ public class CardService {
 	private CardDao cardDao = new CardDao();
 	
 	public boolean addCard(card entity){
-		boolean result = cardDao.add(entity);
-		//cardDao.getSqlSession().close();
-		return result;
+		return cardDao.add(entity);
 	}
 	
 	public boolean lossCard(String stu_id){
-		card record = cardDao.getByStuId(stu_id);
-		record.setStatus(-1);
-		record.setEndtime(new Timestamp(new Date().getTime()));
-		boolean result = cardDao.updateStatus(record);
-		//cardDao.getSqlSession().close();
-		return result;
+		card entity = cardDao.getByStuId(stu_id);
+		entity.setStatus(-1);
+		entity.setEndtime(new Timestamp(new Date().getTime()));
+		return cardDao.update(entity);
+	}
+	
+	public boolean recharge(int card_id, Long amount){
+		card entity = cardDao.getByCardId(card_id);
+		entity.setBalance(entity.getBalance() + amount);
+		return cardDao.update(entity);
+	}
+	
+	public boolean consume(int card_id, Long amount){
+		card entity = cardDao.getByCardId(card_id);
+		entity.setBalance(entity.getBalance() - amount);
+		return cardDao.update(entity);
 	}
 }

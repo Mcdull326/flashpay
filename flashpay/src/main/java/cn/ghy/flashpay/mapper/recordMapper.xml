@@ -5,7 +5,7 @@
     <result column="stu_id" property="stuId" jdbcType="VARCHAR" />
     <result column="card_id" property="cardId" jdbcType="INTEGER" />
     <result column="location_id" property="locationId" jdbcType="INTEGER" />
-    <result column="amout" property="amout" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    stu_id, card_id, location_id, amout, time, status
+    stu_id, card_id, location_id, amount, time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.ghy.flashpay.model.recordExample" >
     select
@@ -92,10 +92,10 @@
   </delete>
   <insert id="insert" parameterType="cn.ghy.flashpay.model.record" >
     insert into record (stu_id, card_id, location_id, 
-      amout, time, status
+      amount, time, status
       )
     values (#{stuId,jdbcType=VARCHAR}, #{cardId,jdbcType=INTEGER}, #{locationId,jdbcType=INTEGER}, 
-      #{amout,jdbcType=DECIMAL}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      #{amount,jdbcType=DECIMAL}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.ghy.flashpay.model.record" >
@@ -110,8 +110,8 @@
       <if test="locationId != null" >
         location_id,
       </if>
-      <if test="amout != null" >
-        amout,
+      <if test="amount != null" >
+        amount,
       </if>
       <if test="time != null" >
         time,
@@ -130,8 +130,8 @@
       <if test="locationId != null" >
         #{locationId,jdbcType=INTEGER},
       </if>
-      <if test="amout != null" >
-        #{amout,jdbcType=DECIMAL},
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
       </if>
       <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
@@ -159,8 +159,8 @@
       <if test="record.locationId != null" >
         location_id = #{record.locationId,jdbcType=INTEGER},
       </if>
-      <if test="record.amout != null" >
-        amout = #{record.amout,jdbcType=DECIMAL},
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
       </if>
       <if test="record.time != null" >
         time = #{record.time,jdbcType=TIMESTAMP},
@@ -178,7 +178,7 @@
     set stu_id = #{record.stuId,jdbcType=VARCHAR},
       card_id = #{record.cardId,jdbcType=INTEGER},
       location_id = #{record.locationId,jdbcType=INTEGER},
-      amout = #{record.amout,jdbcType=DECIMAL},
+      amount = #{record.amount,jdbcType=DECIMAL},
       time = #{record.time,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null" >

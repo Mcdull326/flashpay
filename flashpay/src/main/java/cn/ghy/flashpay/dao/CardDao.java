@@ -35,6 +35,11 @@ public class CardDao {
 		return false;
 	}
 		
+	//select * from card where id = card_id and status =1;
+	public card getByCardId(int card_id){
+		return mapper.selectByPrimaryKey(card_id);
+	}
+	
 	//select * from card where stu_id = stu_id and status = 1;
 	public card getByStuId(String stu_id){
 		cardExample example = new cardExample();
@@ -46,9 +51,9 @@ public class CardDao {
 		return cardList.get(0);
 	}
 	
-	//update card set status = -1 where ...;
-	public boolean updateStatus(card record){
-		if(mapper.updateByPrimaryKey(record) == 1){
+	//update card set ... = ? where ...;
+	public boolean update(card entity){
+		if(mapper.updateByPrimaryKey(entity) == 1){
 			sqlSession.commit();
 			return true;
 		}

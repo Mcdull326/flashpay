@@ -9,7 +9,7 @@ public class record {
 
     private Integer locationId;
 
-    private Long amout;
+    private Long amount;
 
     private Date time;
 
@@ -39,12 +39,12 @@ public class record {
         this.locationId = locationId;
     }
 
-    public Long getAmout() {
-        return amout;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setAmout(Long amout) {
-        this.amout = amout;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     public Date getTime() {

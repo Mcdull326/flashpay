@@ -1,11 +1,23 @@
 package cn.ghy.flashpay;
 
-import cn.ghy.flashpay.service.CardService;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import cn.ghy.flashpay.dao.LocationDao;
+import cn.ghy.flashpay.model.location;
 
 public class TestJson {
 
 	public static void main(String args[]){
-		CardService cardService = new CardService();
-		System.out.println(cardService.lossCard("41211017"));
+		LocationDao locationDao = new LocationDao();
+		
+		location entity = new location();
+		entity.setName("home");
+		entity.setBegintime(new Timestamp(new Date().getTime()));
+		entity.setEndtime(new Timestamp(new Date().getTime()));
+		entity.setStatus(1);
+		boolean result = locationDao.add(entity);
+		
+		System.out.println(result);
 	}
 }
