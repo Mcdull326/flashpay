@@ -12,6 +12,7 @@ import cn.ghy.flashpay.model.card;
 import cn.ghy.flashpay.model.student;
 import cn.ghy.flashpay.service.StudentService;
 import cn.ghy.flashpay.util.JSON;
+import cn.ghy.flashpay.util.MD5;
 import cn.ghy.flashpay.util.Message;
 
 @Controller
@@ -23,7 +24,8 @@ public class StudentController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Message add(@RequestBody student stu) {        
+	public Message add(@RequestBody student stu) {
+		stu.setPassword(MD5.md5Encode(stu.getPassword()));
 		boolean result = studentService.addStu(stu);
 		if(result){
 			msg.setMsg("注册成功");
@@ -41,7 +43,7 @@ public class StudentController {
 			JSONObject returnJSON = new JSONObject();
 			String stu_id = jsonObject.getString("id");
 			String pwd = jsonObject.getString("pwd");
-			student stu = studentService.login(stu_id, pwd);
+			student stu = studentService.login(stu_id, MD5.md5Encode(pwd));
 			card card = studentService.isActive(stu_id);
 			
 			if(stu == null){

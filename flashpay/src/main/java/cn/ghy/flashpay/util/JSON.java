@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 
 /**
  * Created by zhaozeqing on 16/3/27.
@@ -15,7 +16,7 @@ public class JSON {
     private int fieldsLength;
     private Object obj;
 
-    public JSON(Object obj){
+    public JSON(Object obj) {
         this.obj = obj;
         fields = obj.getClass().getDeclaredFields();
         fieldsLength = fields.length;
@@ -41,11 +42,11 @@ public class JSON {
         String fieldName;
 
         try {
-            jsonObject = (JSONObject)new JSONTokener(json).nextValue();
-            for (int i = 0; i < fieldsLength; i++){
+            jsonObject = (JSONObject) new JSONTokener(json).nextValue();
+            for (int i = 0; i < fieldsLength; i++) {
                 fieldName = fields[i].getName();
-                if(!jsonObject.isNull(fieldName)){
-                	setFieldValue(fieldName, jsonObject.get(fieldName), obj);
+                if (!jsonObject.isNull(fieldName)) {
+                    setFieldValue(fieldName, jsonObject.get(fieldName), obj);
                 }
             }
 
@@ -63,34 +64,38 @@ public class JSON {
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-        f.setAccessible(true);
-        try {
-            value = f.get(obj);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        if(f != null){
+            f.setAccessible(true);
+            try {
+                value = f.get(obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return value;
     }
 
-    private void setFieldValue(String fieldName, Object value, Object obj){
+    private void setFieldValue(String fieldName, Object value, Object obj) {
         Field f = null;
         try {
             f = obj.getClass().getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
-        f.setAccessible(true);
-        try {
-            if(value != null){
-            	if(fieldName.equals("balance")){
-            		value = Long.parseLong(value.toString());
-            		f.set(obj, value);
-            	}else{
-            		f.set(obj, value);
-            	}
+        if(f != null){
+            f.setAccessible(true);
+            try {
+                if (value != null) {
+                    if (fieldName.equals("balance") || fieldName.equals("amount")) {
+                        value = BigDecimal.valueOf(Double.parseDouble(value.toString()));
+                        f.set(obj, value);
+                    } else {
+                        f.set(obj, value);
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
     }
 }

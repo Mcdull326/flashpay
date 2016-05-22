@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.ghy.flashpay.model.record" >
     <result column="stu_id" property="stuId" jdbcType="VARCHAR" />
     <result column="card_id" property="cardId" jdbcType="INTEGER" />
-    <result column="location_id" property="locationId" jdbcType="INTEGER" />
+    <result column="seller_id" property="sellerId" jdbcType="INTEGER" />
     <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    stu_id, card_id, location_id, amount, time, status
+    stu_id, card_id, seller_id, amount, time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.ghy.flashpay.model.recordExample" >
     select
@@ -91,10 +91,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.ghy.flashpay.model.record" >
-    insert into record (stu_id, card_id, location_id, 
+    insert into record (stu_id, card_id, seller_id, 
       amount, time, status
       )
-    values (#{stuId,jdbcType=VARCHAR}, #{cardId,jdbcType=INTEGER}, #{locationId,jdbcType=INTEGER}, 
+    values (#{stuId,jdbcType=VARCHAR}, #{cardId,jdbcType=INTEGER}, #{sellerId,jdbcType=INTEGER}, 
       #{amount,jdbcType=DECIMAL}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
       )
   </insert>
@@ -107,8 +107,8 @@
       <if test="cardId != null" >
         card_id,
       </if>
-      <if test="locationId != null" >
-        location_id,
+      <if test="sellerId != null" >
+        seller_id,
       </if>
       <if test="amount != null" >
         amount,
@@ -127,8 +127,8 @@
       <if test="cardId != null" >
         #{cardId,jdbcType=INTEGER},
       </if>
-      <if test="locationId != null" >
-        #{locationId,jdbcType=INTEGER},
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=INTEGER},
       </if>
       <if test="amount != null" >
         #{amount,jdbcType=DECIMAL},
@@ -156,8 +156,8 @@
       <if test="record.cardId != null" >
         card_id = #{record.cardId,jdbcType=INTEGER},
       </if>
-      <if test="record.locationId != null" >
-        location_id = #{record.locationId,jdbcType=INTEGER},
+      <if test="record.sellerId != null" >
+        seller_id = #{record.sellerId,jdbcType=INTEGER},
       </if>
       <if test="record.amount != null" >
         amount = #{record.amount,jdbcType=DECIMAL},
@@ -177,7 +177,7 @@
     update record
     set stu_id = #{record.stuId,jdbcType=VARCHAR},
       card_id = #{record.cardId,jdbcType=INTEGER},
-      location_id = #{record.locationId,jdbcType=INTEGER},
+      seller_id = #{record.sellerId,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=DECIMAL},
       time = #{record.time,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}

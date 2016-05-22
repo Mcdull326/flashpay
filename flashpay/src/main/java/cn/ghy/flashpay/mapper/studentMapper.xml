@@ -100,8 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.ghy.flashpay.model.student" >
-    insert into student (id, name, password, phone, status)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+    insert into student (id, name, password, 
+      phone, status)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.ghy.flashpay.model.student" >
     insert into student

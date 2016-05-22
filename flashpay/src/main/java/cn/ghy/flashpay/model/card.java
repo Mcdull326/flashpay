@@ -1,5 +1,6 @@
 package cn.ghy.flashpay.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class card {
@@ -7,13 +8,17 @@ public class card {
 
     private String stuId;
 
-    private Long balance;
+    private BigDecimal balance;
 
     private Date begintime;
 
     private Date endtime;
 
     private Integer status;
+
+    private String publicKey;
+
+    private String privateKey;
 
     public Integer getId() {
         return id;
@@ -31,11 +36,11 @@ public class card {
         this.stuId = stuId == null ? null : stuId.trim();
     }
 
-    public Long getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -61,5 +66,21 @@ public class card {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey == null ? null : publicKey.trim();
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey == null ? null : privateKey.trim();
     }
 }

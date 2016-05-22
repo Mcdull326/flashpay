@@ -8,6 +8,8 @@
     <result column="begintime" property="begintime" jdbcType="TIMESTAMP" />
     <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="public_key" property="publicKey" jdbcType="VARCHAR" />
+    <result column="private_key" property="privateKey" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, stu_id, balance, begintime, endtime, status
+    id, stu_id, balance, begintime, endtime, status, public_key, private_key
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.ghy.flashpay.model.cardExample" >
     select
@@ -102,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="cn.ghy.flashpay.model.card" >
     insert into card (id, stu_id, balance, 
-      begintime, endtime, status
-      )
+      begintime, endtime, status, 
+      public_key, private_key)
     values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, 
-      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
-      )
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{publicKey,jdbcType=VARCHAR}, #{privateKey,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ghy.flashpay.model.card" >
     insert into card
@@ -129,6 +131,12 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="publicKey != null" >
+        public_key,
+      </if>
+      <if test="privateKey != null" >
+        private_key,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,6 +156,12 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publicKey != null" >
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        #{privateKey,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +192,12 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.publicKey != null" >
+        public_key = #{record.publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privateKey != null" >
+        private_key = #{record.privateKey,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +210,9 @@
       balance = #{record.balance,jdbcType=DECIMAL},
       begintime = #{record.begintime,jdbcType=TIMESTAMP},
       endtime = #{record.endtime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      public_key = #{record.publicKey,jdbcType=VARCHAR},
+      private_key = #{record.privateKey,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +235,12 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="publicKey != null" >
+        public_key = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null" >
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +250,9 @@
       balance = #{balance,jdbcType=DECIMAL},
       begintime = #{begintime,jdbcType=TIMESTAMP},
       endtime = #{endtime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      public_key = #{publicKey,jdbcType=VARCHAR},
+      private_key = #{privateKey,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

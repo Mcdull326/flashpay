@@ -22,7 +22,7 @@
 		<mapper resource="cn/ghy/flashpay/mapper/admin_roleMapper.xml" />
 		<mapper resource="cn/ghy/flashpay/mapper/adminMapper.xml" />
 		<mapper resource="cn/ghy/flashpay/mapper/cardMapper.xml" />
-		<mapper resource="cn/ghy/flashpay/mapper/locationMapper.xml" />
+		<mapper resource="cn/ghy/flashpay/mapper/sellerMapper.xml" />
 		<mapper resource="cn/ghy/flashpay/mapper/recordMapper.xml" />
 		<mapper resource="cn/ghy/flashpay/mapper/roleMapper.xml" />
 		<mapper resource="cn/ghy/flashpay/mapper/studentMapper.xml" />

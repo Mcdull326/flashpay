@@ -1,5 +1,6 @@
 package cn.ghy.flashpay.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class record {
@@ -7,9 +8,9 @@ public class record {
 
     private Integer cardId;
 
-    private Integer locationId;
+    private Integer sellerId;
 
-    private Long amount;
+    private BigDecimal amount;
 
     private Date time;
 
@@ -31,19 +32,19 @@ public class record {
         this.cardId = cardId;
     }
 
-    public Integer getLocationId() {
-        return locationId;
+    public Integer getSellerId() {
+        return sellerId;
     }
 
-    public void setLocationId(Integer locationId) {
-        this.locationId = locationId;
+    public void setSellerId(Integer sellerId) {
+        this.sellerId = sellerId;
     }
 
-    public Long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

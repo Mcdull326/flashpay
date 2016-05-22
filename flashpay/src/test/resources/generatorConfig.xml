@@ -44,6 +44,6 @@
 		<table tableName="card" domainObjectName="card"></table>
 		<table tableName="admin" domainObjectName="admin"></table>
 		<table tableName="record" domainObjectName="record"></table>
-		<table tableName="location" domainObjectName="location"></table>
+		<table tableName="seller" domainObjectName="seller"></table>
     </context>
 </generatorConfiguration>

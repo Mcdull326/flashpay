@@ -1,57 +1,51 @@
 package cn.ghy.flashpay.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import cn.ghy.flashpay.mapper.studentMapper;
 import cn.ghy.flashpay.model.student;
-import cn.ghy.flashpay.model.studentExample;
-import cn.ghy.flashpay.util.GetSqlSession;
+import cn.ghy.flashpay.util.GetSqlSessionFactory;
 
 public class StudentDao {
 
-	// DB Connect
-	private SqlSession sqlSession = GetSqlSession.getSqlSession();
-	// Mapper
-	private studentMapper mapper = sqlSession.getMapper(studentMapper.class);
+	private SqlSessionFactory sqlSessionFactory = GetSqlSessionFactory.getSqlSessionFactory();
 
-	//insert into student ()
-	public boolean add(student entity){
-		try{
-			if(mapper.insert(entity) == 1){
+	// insert into student ()
+	public boolean add(student entity) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		studentMapper mapper = sqlSession.getMapper(studentMapper.class);
+		try {
+			if (mapper.insert(entity) == 1) {
 				sqlSession.commit();
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}finally{
+		} finally {
 			sqlSession.close();
 		}
 	}
-	
-	//select * from student where id = id;
-	public student selectById(String id){
-		try{
-			return mapper.selectByPrimaryKey(id);
-		}finally{
-			sqlSession.close();
-		}
-	}
-	
-	// select * from student where status = 0 or 1
-	public List<student> getAll() throws SQLException {
+
+	// select * from student where id = id;
+	public student selectById(String id) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		studentMapper mapper = sqlSession.getMapper(studentMapper.class);
 		try {
-			studentExample example = new studentExample();
-			List<Integer> values = new ArrayList<Integer>();
-			values.add(0);
-			values.add(1);
-			example.or().andStatusIn(values);
+			return mapper.selectByPrimaryKey(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
 
-			return mapper.selectByExample(example);
-
+	// select * from student
+	public List<student> getAll() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		studentMapper mapper = sqlSession.getMapper(studentMapper.class);
+		try {
+			return mapper.selectByExample(null);
 		} finally {
 			sqlSession.close();
 		}

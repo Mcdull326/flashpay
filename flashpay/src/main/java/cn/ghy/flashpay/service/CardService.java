@@ -1,7 +1,9 @@
 package cn.ghy.flashpay.service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import cn.ghy.flashpay.dao.CardDao;
 import cn.ghy.flashpay.model.card;
@@ -21,15 +23,19 @@ public class CardService {
 		return cardDao.update(entity);
 	}
 	
-	public boolean recharge(int card_id, Long amount){
+	public boolean recharge(int card_id, BigDecimal amount){
 		card entity = cardDao.getByCardId(card_id);
-		entity.setBalance(entity.getBalance() + amount);
+		entity.setBalance(amount.add(entity.getBalance()));
 		return cardDao.update(entity);
 	}
 	
-	public boolean consume(int card_id, Long amount){
+	public boolean consume(int card_id, BigDecimal amount){
 		card entity = cardDao.getByCardId(card_id);
-		entity.setBalance(entity.getBalance() - amount);
+		entity.setBalance(entity.getBalance().subtract(amount));
 		return cardDao.update(entity);
+	}
+	
+	public List<card> getAll(){
+		return cardDao.getAll();
 	}
 }
