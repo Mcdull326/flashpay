@@ -57,7 +57,7 @@ public class CardDao {
 		}
 	}
 
-	// update card set ... = ? where ...;
+	// update card
 	public boolean update(card entity) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		cardMapper mapper = sqlSession.getMapper(cardMapper.class);
